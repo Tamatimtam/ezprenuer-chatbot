@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body" id="chat-area">
+                        <!-- Chat messages will be displayed here -->
+                    </div>
+                    <div class="card-footer">
+                        <input type="text" class="form-control" id="user-input" placeholder="Type your message...">
+                    </div>
+                </div>
+            </div>
+        </div><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body" id="chat-area">
+                        <!-- Chat messages will be displayed here -->
+                    </div>
+                    <div class="card-footer">
+                        <input type="text" class="form-control" id="user-input" placeholder="Type your message...">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for handling chat interactions
+        const chatArea = document.getElementById('chat-area');
+        const userInput = document.getElementById('user-input');
+
+        // Function to add a message to the chat area
+        function addMessage(sender, message) {
+            const messageElement = document.createElement('p');
+            messageElement.textContent = `${sender}: ${message}`;
+            chatArea.appendChild(messageElement);
+        }
+
+        // Function to send user input to the server and receive response
+        function sendMessage() {
+            const userInputValue = userInput.value.trim();
+            if (userInputValue !== '') {
+                addMessage('You', userInputValue);
+                userInput.value = '';  // Clear input field
+                fetch('/send-message', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message: userInputValue })
+                })
+                .then(response => response.json())
+                .then(data => addMessage('Bot', data.message))
+                .catch(error => console.error('Error:', error));
+            }
+        }
+
+        userInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
+
+    </div>
+
+    <script>
+        // JavaScript for handling chat interactions
+        const chatArea = document.getElementById('chat-area');
+        const userInput = document.getElementById('user-input');
+
+        // Function to add a message to the chat area
+        function addMessage(sender, message) {
+            const messageElement = document.createElement('p');
+            messageElement.textContent = `${sender}: ${message}`;
+            chatArea.appendChild(messageElement);
+        }
+
+        // Function to send user input to the server and receive response
+        function sendMessage() {
+            const userInputValue = userInput.value.trim();
+            if (userInputValue !== '') {
+                addMessage('You', userInputValue);
+                userInput.value = '';  // Clear input field
+                fetch('/send-message', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message: userInputValue })
+                })
+                .then(response => response.json())
+                .then(data => addMessage('Bot', data.message))
+                .catch(error => console.error('Error:', error));
+            }
+        }
+
+        userInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
